@@ -121,7 +121,6 @@ public class KrokyActivity extends AppCompatActivity {
         chart.setTouchEnabled(false);
         chart.setExtraBottomOffset(20);
         chart.setExtraTopOffset(5);
-//        chart.setDrawingCacheBackgroundColor(Color.parseColor("#FF0000"));
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setTextColor(Color.parseColor("#000000"));

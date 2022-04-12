@@ -46,9 +46,7 @@ public class KontaktyActivity extends AppCompatActivity {
     public void goBack(View view) {
         finish();
     }
-
-
-
+    
 
     private void addCursorAdapter() {
         cursorAdapter = new SimpleCursorAdapter(this, R.layout.list_kontakty_layout, dbWorker.getCursorKontakty(),
@@ -64,24 +62,13 @@ public class KontaktyActivity extends AppCompatActivity {
 
             ArrayList cislo = dbWorker.getKontaktCislo();
 
-            //TODO: Normal call
-//            Intent callIntent = new Intent(Intent.ACTION_CALL);
-//            callIntent.setData(Uri.parse("tel:" + cislo.get(position)));
-//            startActivity(callIntent);
             CustomDialog cdd = new CustomDialog(KontaktyActivity.this, (String) cislo.get(position));
-//                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
             int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
 
             cdd.getWindow().setLayout(width, height);
             cdd.show();
-//            //TODO: Viber welcome screen of contact call
-//            Uri uri = (Uri.parse("tel:" + cislo.get(position)));
-//            Intent intent = new Intent("android.intent.action.VIEW");
-//            intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
-//            intent.setData(uri);
-//            startActivity(intent);
         });
 
 
