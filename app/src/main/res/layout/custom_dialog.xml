@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#BF000000"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_dia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFCCBC"
+        android:text="Klasicky hovor alebo vidohovor cez Viber?"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_dia"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#C8E6C9"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_baseline_call_30"
+            android:drawableTint="#000000"
+            android:fontFamily="sans-serif"
+            android:text="Klasický hovor"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp"
+            app:strokeColor="#2E7D32"
+            app:strokeWidth="3dp" />
+
+        <Button
+            android:id="@+id/btn_viber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E1BEE7"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_baseline_videocam_30"
+            android:drawableTint="#000000"
+            android:fontFamily="sans-serif"
+            android:text="Hovor cez Viber"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:cornerRadius="15dp"
+            app:strokeColor="#4A148C"
+            app:strokeWidth="3dp" />
+    </LinearLayout>
+
+</RelativeLayout>
