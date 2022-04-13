@@ -53,7 +53,8 @@
             android:textStyle="bold"
             app:cornerRadius="15dp"
             app:strokeColor="#2E7D32"
-            app:strokeWidth="3dp" />
+            app:strokeWidth="3dp"
+            android:focusable="true" />
 
         <Button
             android:id="@+id/btn_viber"
@@ -76,7 +77,8 @@
             android:textStyle="bold"
             app:cornerRadius="15dp"
             app:strokeColor="#4A148C"
-            app:strokeWidth="3dp" />
+            app:strokeWidth="3dp"
+            android:focusable="true" />
     </LinearLayout>
 
 </RelativeLayout>

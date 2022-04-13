@@ -29,7 +29,6 @@ import java.util.Date;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.example.old_aged_app.KrokyActivity.getMyDate;
 
-
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private Button krokyAkt;
@@ -50,14 +49,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor stepDetectorSensor;
     private SensorManager sensorManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         Context context = getApplicationContext();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
 
         DBWorker dbWorker = new DBWorker(this);
-
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS) == PackageManager.PERMISSION_DENIED
@@ -96,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager.registerListener(this, stepDetectorSensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        krokyAkt.setText("Presiel si:\n" + counter + " / " + TARGET_STEPS + "");
+        krokyAkt.setText("Prešiel si:\n" + counter + " / " + TARGET_STEPS + "");
 
         hra = findViewById(R.id.hraBtn);
         kontakty = findViewById(R.id.volanieBtn);
@@ -140,16 +134,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         } else {
             counter = Integer.parseInt(k.getKroky());
         }
-
         if (TARGET_STEPS <= counter) {
             krokyAkt.setBackgroundColor(Color.parseColor("#78f400"));
         } else {
             krokyAkt.setBackgroundColor(Color.parseColor("#81D4FA"));
         }
-
         checkFirstRun();
     }
-
 
     public void checkFirstRun() {
         boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE).getBoolean("isFirstRun", true);
@@ -165,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -174,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         cal1.add(Calendar.DATE, 0);
 
         TARGET_STEPS = sharedPreferences.getInt("goal", 5000);
-        krokyAkt.setText("Presiel si:\n" + counter + " / " + TARGET_STEPS + "");
+        krokyAkt.setText("Prešiel si:\n" + counter + " / " + TARGET_STEPS + "");
         activityRunning = true;
         stepDetectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         Sensor countSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -185,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if (countSensor != null) {
             sensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
         }
-
         if (TARGET_STEPS <= counter) {
             krokyAkt.setBackgroundColor(Color.parseColor("#78f400"));
         } else {
@@ -200,23 +189,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         cal1.add(Calendar.DATE, 0);
         String datum = s1.format(new Date(cal1.getTimeInMillis()));
 
-
         if (activityRunning) {
             counter = (int) event.values[0];
-            krokyAkt.setText("Presiel si:\n" + counter + " / " + TARGET_STEPS + "");
+            krokyAkt.setText("Prešiel si:\n" + counter + " / " + TARGET_STEPS + "");
 
         }
         if (dbWorker.getKroky(getMyDate("dd-MM-yyyy", 0)).getID() < 1) {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, 0);
-            event.values[0] = Float.parseFloat("0");
-
-            event.values[0] = 0;
-
             counter = 0;
             Kroky kroky = new Kroky(1, datum, String.valueOf(counter));
             dbWorker.addKroky(kroky);
-
         } else {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.DATE, 0);
@@ -225,7 +208,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
         if (TARGET_STEPS <= counter) {
             krokyAkt.setBackgroundColor(Color.parseColor("#78f400"));
-
         } else {
             krokyAkt.setBackgroundColor(Color.parseColor("#81D4FA"));
         }

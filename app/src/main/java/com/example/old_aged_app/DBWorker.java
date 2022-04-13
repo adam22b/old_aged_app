@@ -1,6 +1,5 @@
 package com.example.old_aged_app;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -21,17 +20,81 @@ public class DBWorker extends DBHelper {
         return c;
     }
 
-    public Cursor getCursorLieky() {
+    public void addKontakt(Kontakty kontakty) {
+        ContentValues values = new ContentValues();
+        values.put(MyContract.Kontakty.COLUMN_MENO, kontakty.getMeno());
+        values.put(MyContract.Kontakty.COLUMN_CISLO, kontakty.getCislo());
+
         SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + MyContract.Lieky.TABLE_NAME, null);
-        c.moveToFirst();
+
+        long newRowId = db.insert(
+                MyContract.Kontakty.TABLE_NAME,
+                null,
+                values
+        );
         db.close();
-        return c;
+    }
+
+    public void delKontakty(long ID) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.delete(
+                MyContract.Kontakty.TABLE_NAME,
+                MyContract.Kontakty.COLUMN_ID + "= ?",
+                new String[]{"" + ID});
+        db.close();
     }
 
     private ArrayList<String> kontaktyId = new ArrayList<>();
-    public ArrayList<String> getKontaktyId() {
+    public ArrayList<String> getKontaktId() {
         return kontaktyId;
+    }
+
+    public ArrayList<String> getKontaktCislo() {
+        ArrayList<String> zoznam = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT * FROM " + MyContract.Kontakty.TABLE_NAME,
+                null);
+        if (c.moveToFirst()) {
+            do {
+                kontaktyId.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_ID)));
+                zoznam.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_CISLO)));
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return zoznam;
+    }
+
+    public void addKroky(Kroky kroky) {
+        ContentValues values = new ContentValues();
+        values.put(MyContract.Kroky.COLUMN_KROK, kroky.getKroky());
+        values.put(MyContract.Kroky.COLUMN_DATUM, kroky.getDatum());
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        long newRowId = db.insert(
+                MyContract.Kroky.TABLE_NAME,
+                null,
+                values
+        );
+        db.close();
+    }
+
+    public void updateKroky(Kroky kroky) {
+        ContentValues values = new ContentValues();
+        values.put(MyContract.Kroky.COLUMN_KROK, kroky.getKroky());
+        values.put(MyContract.Kroky.COLUMN_DATUM, kroky.getDatum());
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.update(
+                MyContract.Kroky.TABLE_NAME,
+                values,
+                MyContract.Kroky.COLUMN_DATUM + "= ?",
+                new String[]{"" + kroky.getDatum()}
+        );
+        db.close();
     }
 
     public Kroky getKroky(String date) {
@@ -69,58 +132,12 @@ public class DBWorker extends DBHelper {
         }
     }
 
-    public void updateKroky(Kroky kroky) {
-        ContentValues values = new ContentValues();
-        values.put(MyContract.Kroky.COLUMN_KROK, kroky.getKroky());
-        values.put(MyContract.Kroky.COLUMN_DATUM, kroky.getDatum());
-
+    public Cursor getCursorLieky() {
         SQLiteDatabase db = getWritableDatabase();
-        db.update(
-                MyContract.Kroky.TABLE_NAME,
-                values,
-                MyContract.Kroky.COLUMN_DATUM + "= ?",
-                new String[]{"" + kroky.getDatum()}
-        );
+        Cursor c = db.rawQuery("SELECT * FROM " + MyContract.Lieky.TABLE_NAME, null);
+        c.moveToFirst();
         db.close();
-    }
-
-    private ArrayList<String> kontaktId = new ArrayList<>();
-
-    public ArrayList<String> getKontaktId() {
-        return kontaktId;
-    }
-
-    @SuppressLint("Range")
-    public ArrayList<String> getKontaktCislo() {
-        ArrayList<String> zoznam = new ArrayList<>();
-        SQLiteDatabase db = getWritableDatabase();
-        Cursor c = db.rawQuery(
-                "SELECT * FROM " + MyContract.Kontakty.TABLE_NAME,
-                null);
-        if (c.moveToFirst()) {
-            do {
-                kontaktyId.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_ID)));
-                zoznam.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_CISLO)));
-            } while (c.moveToNext());
-        }
-        c.close();
-        db.close();
-        return zoznam;
-    }
-
-    public void addKontakt(Kontakty kontakty) {
-        ContentValues values = new ContentValues();
-        values.put(MyContract.Kontakty.COLUMN_MENO, kontakty.getMeno());
-        values.put(MyContract.Kontakty.COLUMN_CISLO, kontakty.getCislo());
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        long newRowId = db.insert(
-                MyContract.Kontakty.TABLE_NAME,
-                null,
-                values
-        );
-        db.close();
+        return c;
     }
 
     public void addLieky(Lieky lieky) {
@@ -139,31 +156,6 @@ public class DBWorker extends DBHelper {
         db.close();
     }
 
-    public void addKroky(Kroky kroky) {
-        ContentValues values = new ContentValues();
-        values.put(MyContract.Kroky.COLUMN_KROK, kroky.getKroky());
-        values.put(MyContract.Kroky.COLUMN_DATUM, kroky.getDatum());
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        long newRowId = db.insert(
-                MyContract.Kroky.TABLE_NAME,
-                null,
-                values
-        );
-        db.close();
-    }
-
-    public void delKontakty(long ID) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        db.delete(
-                MyContract.Kontakty.TABLE_NAME,
-                MyContract.Kontakty.COLUMN_ID + "= ?",
-                new String[]{"" + ID});
-        db.close();
-    }
-
     public void delLieky(long ID) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -174,3 +166,21 @@ public class DBWorker extends DBHelper {
         db.close();
     }
 }
+
+
+
+//    private ArrayList<String> kontaktyId = new ArrayList<>();
+//    public ArrayList<String> getKontaktyId() {
+//        return kontaktyId;
+//    }
+
+
+
+
+
+
+
+
+
+
+

@@ -5,21 +5,17 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-//import android.widget.TimePicker;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EditLiekyActivity extends AppCompatActivity {
 
@@ -49,7 +45,6 @@ public class EditLiekyActivity extends AppCompatActivity {
         cas.setOnClickListener(v -> {
             picker = new TimePickerDialog(EditLiekyActivity.this, R.style.TimePickerTheme,
                     (view, hourOfDay, minute) -> {
-
                         if (minute > -1 && minute < 10) {
                             cas.setText(hourOfDay + " : 0" + minute);
                             reqCode = Integer.parseInt((hourOfDay + "0" + minute));
@@ -61,7 +56,6 @@ public class EditLiekyActivity extends AppCompatActivity {
                             h = hourOfDay;
                             m = minute;
                         }
-
                     }, hour, minutes, true);
             picker.show();
         });
@@ -73,17 +67,11 @@ public class EditLiekyActivity extends AppCompatActivity {
             boolean possible = false;
 
             if(nazov.getText().toString().matches("") || cas.getText().toString().matches("")) {
-//                final CharSequence[] items = {"Ok"};
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(EditLiekyActivity.this);
 
-                dialog.setTitle("Niečo je zle");
+                dialog.setTitle("Niečo je zle,");
                 dialog.setNeutralButton("Ok",null);
-                dialog.setMessage("Názov lieku a čas\npripomenutia sú povinné!");
-//                dialog.setItems(items, (dialog1, i) -> {
-//                    if (i == 0) {
-//                    }
-//                });
+                dialog.setMessage("názov lieku a čas\npripomenutia sú povinné!");
                 dialog.show();
             }else {
                 possible = true;
@@ -95,7 +83,6 @@ public class EditLiekyActivity extends AppCompatActivity {
     }
 
     public void saveLiek(View view,boolean pos) {
-
         if(pos){
             Log.e("TEST", String.valueOf(pos));
             liek = new Lieky(id, nazov.getText().toString(), cas.getText().toString(), info.getText().toString());

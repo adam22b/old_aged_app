@@ -3,7 +3,6 @@ package com.example.old_aged_app;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -71,7 +70,6 @@ public class KrokyActivity extends AppCompatActivity {
         ll.setTextSize(16f);
         ll.setLineColor(Color.parseColor("#000000"));
 
-
         BarData data = createChartData();
         configureChartAppearance();
         prepareChartData(data);
@@ -94,7 +92,6 @@ public class KrokyActivity extends AppCompatActivity {
                 ((dbWorker.getKroky(getMyDate("dd-MM-yyyy", -2)).getKroky() == null) ? String.valueOf(0) : dbWorker.getKroky(getMyDate("dd-MM-yyyy", -2)).getKroky()),
                 ((dbWorker.getKroky(getMyDate("dd-MM-yyyy", -1)).getKroky() == null) ? String.valueOf(0) : dbWorker.getKroky(getMyDate("dd-MM-yyyy", -1)).getKroky()),
                 ((dbWorker.getKroky(getMyDate("dd-MM-yyyy", 0)).getKroky() == null) ? String.valueOf(0) : dbWorker.getKroky(getMyDate("dd-MM-yyyy", 0)).getKroky())};
-
         optionBtn = findViewById(R.id.optionBtn);
         chart = findViewById(R.id.fragment_verticalbarchart_chart);
 
@@ -106,7 +103,6 @@ public class KrokyActivity extends AppCompatActivity {
         ll.setLineWidth(4f);
         ll.setTextSize(16f);
         ll.setLineColor(Color.parseColor("#000000"));
-
 
         BarData data = createChartData();
         data.setValueFormatter(new MyValueFormatter());
@@ -188,7 +184,6 @@ public class KrokyActivity extends AppCompatActivity {
         return data;
     }
 
-
     private void prepareChartData(BarData data) {
         data.setValueTextSize(16);
         data.setValueFormatter(new MyValueFormatter());
@@ -196,10 +191,9 @@ public class KrokyActivity extends AppCompatActivity {
         chart.invalidate();
     }
 
-
     public static String getCalculatedDate(String dateFormat, int days) {
         Calendar cal = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat s = new SimpleDateFormat(dateFormat);
+        SimpleDateFormat s = new SimpleDateFormat(dateFormat);
         cal.add(Calendar.DAY_OF_YEAR, days);
 
         switch (s.format(new Date(cal.getTimeInMillis()))) {

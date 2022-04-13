@@ -14,7 +14,6 @@ public class EditKrokyActivity extends AppCompatActivity {
 
     TextView ciel;
     Button save;
-    int test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +23,14 @@ public class EditKrokyActivity extends AppCompatActivity {
         ciel = findViewById(R.id.ciel);
         save = findViewById(R.id.saveciel);
 
-
         save.setOnLongClickListener(v -> {
             boolean possible = false;
 
             if(ciel.getText().toString().matches("")) {
-                final CharSequence[] items = {"Ok"};
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(EditKrokyActivity.this);
-
-                dialog.setTitle("Niečo je zle\nCieľový počet krokov je povinný!");
-                dialog.setItems(items, (dialog1, i) -> {
-                    if (i == 0) {
-                    }
-                });
+                dialog.setTitle("Niečo je zle,");
+                dialog.setMessage("cieľový počet krokov je povinný!");
+                dialog.setNeutralButton("Ok",null);
                 dialog.show();
             }else {
                 possible = true;
@@ -48,16 +41,6 @@ public class EditKrokyActivity extends AppCompatActivity {
             }
             return possible;
         });
-
-//        save.setOnClickListener(v -> {
-//            Intent intent = new Intent(EditKrokyActivity.this, MainActivity.class);
-//            saveCiel(v);
-//            KrokyActivity.instance.finish();
-//            startActivity(intent);
-//        });
-
-
-
     }
 
     public void saveCiel(View view,boolean pos) {

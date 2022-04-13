@@ -11,15 +11,13 @@ import android.widget.Button;
 
 public class CustomDialog extends Dialog implements android.view.View.OnClickListener {
 
-    public Activity c;
-    public Dialog d;
+    public Activity activity;
     public Button phone, viber;
-    String meno,cislo;
-    int pos;
+    String cislo;
 
-    public CustomDialog(Activity a,String cislo) {
-        super(a);
-        this.c = a;
+    public CustomDialog(Activity activity,String cislo) {
+        super(activity);
+        this.activity = activity;
         this.cislo = cislo;
     }
 
@@ -28,11 +26,10 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_dialog);
-        phone = (Button) findViewById(R.id.btn_phone);
-        viber = (Button) findViewById(R.id.btn_viber);
+        phone = findViewById(R.id.btn_phone);
+        viber = findViewById(R.id.btn_viber);
         phone.setOnClickListener(this);
         viber.setOnClickListener(this);
-
     }
 
     @Override
@@ -49,28 +46,27 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
         }
         dismiss();
     }
+
     public void callViber(){
         try {
-            Intent i = c.getApplicationContext().getPackageManager().getLaunchIntentForPackage("com.viber.voip");
             Uri uri = (Uri.parse("tel:" + cislo));
             Intent intent = new Intent("android.intent.action.VIEW");
             intent.setClassName("com.viber.voip", "com.viber.voip.WelcomeActivity");
             intent.setData(uri);
-            c.startActivity(intent);
+            activity.startActivity(intent);
         } catch (Exception e) {
             try {
-                c.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://market.android.com/details?id=com.viber.voip")));
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://market.android.com/details?id=com.viber.voip")));
             } catch (android.content.ActivityNotFoundException anfe) {
-                c.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.viber.voip")));
+                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.viber.voip")));
             }
         }
 
     }
 
     public void callPhone(){
-
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + cislo));
-        c.startActivity(callIntent);
+        activity.startActivity(callIntent);
     }
 }

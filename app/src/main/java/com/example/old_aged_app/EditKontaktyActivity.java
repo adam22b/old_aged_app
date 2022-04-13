@@ -26,7 +26,6 @@ public class EditKontaktyActivity extends AppCompatActivity {
         cislo = findViewById(R.id.cislo);
         saveKontaktBtn = findViewById(R.id.savekontakt);
 
-
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 10);
 
@@ -34,18 +33,10 @@ public class EditKontaktyActivity extends AppCompatActivity {
             boolean possible = false;
 
             if(meno.getText().toString().matches("") || cislo.getText().toString().matches("") || !cislo.getText().toString().startsWith("09") ) {
-//                final CharSequence[] items = {"Ok"};
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(EditKontaktyActivity.this);
-
-
-                dialog.setTitle("Niečo je zle");
+                dialog.setTitle("Niečo je zle,");
                 dialog.setNeutralButton("Ok",null);
-                dialog.setMessage("Meno a číslo sú povinné!\nČíslo musí byť v tvare:\n0905123123");
-//                dialog.setItems(items, (dialog1, i) -> {
-//                    if (i == 0) {
-//                    }
-//                });
+                dialog.setMessage("meno a číslo sú povinné!\nČíslo musí byť v tvare:\n0905123123");
                 dialog.show();
             }else {
                 possible = true;
@@ -53,7 +44,6 @@ public class EditKontaktyActivity extends AppCompatActivity {
             }
             return possible;
         });
-
     }
 
     public void saveKontakt(View view,boolean pos) {

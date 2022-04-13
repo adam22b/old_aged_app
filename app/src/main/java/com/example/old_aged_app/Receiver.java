@@ -15,7 +15,6 @@ import android.os.Vibrator;
 
 import androidx.core.app.NotificationCompat;
 
-
 public class Receiver extends BroadcastReceiver {
 
     private static int NOTIFICATION_ID = 1;

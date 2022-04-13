@@ -5,11 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -46,15 +42,12 @@ public class KontaktyActivity extends AppCompatActivity {
     public void goBack(View view) {
         finish();
     }
-    
 
     private void addCursorAdapter() {
         cursorAdapter = new SimpleCursorAdapter(this, R.layout.list_kontakty_layout, dbWorker.getCursorKontakty(),
                 new String[]{MyContract.Kontakty.COLUMN_MENO, MyContract.Kontakty.COLUMN_CISLO},
                 new int[]{R.id.textView,R.id.textView2}, 0);
         listView.setAdapter(cursorAdapter);
-
-
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Cursor c = ((SimpleCursorAdapter) listView.getAdapter()).getCursor();
@@ -70,8 +63,6 @@ public class KontaktyActivity extends AppCompatActivity {
             cdd.getWindow().setLayout(width, height);
             cdd.show();
         });
-
-
 
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             final CharSequence[] items = {"Ano, chcem zmazat kontat", "Nie, ponechat kontakt"};
