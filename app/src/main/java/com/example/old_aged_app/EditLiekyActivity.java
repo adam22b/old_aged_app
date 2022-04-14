@@ -110,8 +110,10 @@ public class EditLiekyActivity extends AppCompatActivity {
         Intent intent = new Intent(EditLiekyActivity.this, Receiver.class);
         intent.putExtra("nameMed", nazov.getText().toString());
         intent.putExtra("infoMed", info.getText().toString());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(EditLiekyActivity.this, reqCOde, intent, 0);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(),
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(EditLiekyActivity.this, reqCOde, intent, 0);
+        alarmManager
+                .setInexactRepeating(AlarmManager.RTC_WAKEUP, cal_alarm.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 

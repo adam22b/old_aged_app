@@ -1,5 +1,6 @@
 package com.example.old_aged_app;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -50,6 +51,7 @@ public class DBWorker extends DBHelper {
         return kontaktyId;
     }
 
+
     public ArrayList<String> getKontaktCislo() {
         ArrayList<String> zoznam = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
@@ -58,8 +60,10 @@ public class DBWorker extends DBHelper {
                 null);
         if (c.moveToFirst()) {
             do {
-                kontaktyId.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_ID)));
-                zoznam.add(c.getString(c.getColumnIndex(MyContract.Kontakty.COLUMN_CISLO)));
+                kontaktyId.add(c.getString(c.
+                        getColumnIndex(MyContract.Kontakty.COLUMN_ID)));
+                zoznam.add(c.getString(c.
+                        getColumnIndex(MyContract.Kontakty.COLUMN_CISLO)));
             } while (c.moveToNext());
         }
         c.close();
